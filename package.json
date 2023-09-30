@@ -1,0 +1,34 @@
+{
+  "name": "datlichkhambenhpj",
+  "version": "1.0.0",
+  "description": "Dat Lich Kham Benh",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhduy2205/DatLichKhamBenhPJ.git"
+  },
+  "author": "Hoang Duy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nhduy2205/DatLichKhamBenhPJ/issues"
+  },
+  "homepage": "https://github.com/nhduy2205/DatLichKhamBenhPJ#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.9",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "gravatar": "^1.8.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.5.3",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.1",
+    "nodemon": "^3.0.1"
+  }
+}
