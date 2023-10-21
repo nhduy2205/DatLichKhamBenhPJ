@@ -1,0 +1,22 @@
+const mongoose = require('mongoose');
+
+const BHYTSchema = new mongoose.Schema({
+    benhnhan: {
+        type: mongoose.Schema.Types.ObjectID,
+        ref: 'benhnhan'
+    },
+    mathe: {
+        type: String,
+        require: true
+    },
+    thoihanthetu: {
+        type: Date,
+        default: Date.now
+    },
+    thoihantheden: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+module.exports = BHYT = mongoose.model('bhyt', BHYTSchema);
