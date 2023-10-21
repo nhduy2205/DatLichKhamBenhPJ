@@ -2,21 +2,18 @@ const mongoose = require('mongoose');
 
 const BenhNhanSchema = new mongoose.Schema({
     hoten: {
-        type: String,
-        required: true
+        type: String
     },
     sodienthoai: {
-        type: String,
-        required: true
+        type: String
     },
     ngaysinh: {
         type: Date,
         default: Date.now
     },
     gioitinh: {
-        type: Number,
-        required: true
+        type: Number
     }
 });
 
-module.exports = BenhNhan = mongoose.model('benhnhan', BenhNhanSchema);
+module.exports = BenhNhan = mongoose.model('benhnhans', BenhNhanSchema);

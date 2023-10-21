@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const BHYTSchema = new mongoose.Schema({
     benhnhan: {
         type: mongoose.Schema.Types.ObjectID,
-        ref: 'benhnhan'
+        ref: 'benhnhans'
     },
     mathe: {
         type: String,

@@ -12,10 +12,6 @@ const LoaiPhongKhamSchema = new mongoose.Schema({
     },
     soluong: {
         type: Number,        
-    },  
-    bacsikham:{
-        type: Object,
-        ref: 'bacsi'
     },
     dichvu: {
         type: [String]
