@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const PhongKhanSchema = new mongoose.Schema({
+const PhongKhamBenhSchema = new mongoose.Schema({
     tenphong: {
         type: String,
         required: true
@@ -11,16 +11,16 @@ const PhongKhanSchema = new mongoose.Schema({
     },
     trangthai: {
         type: String,
-        default: 'Còn trống'
+        default: 'controng'
     },
-    bacsikham:{
-        type: Object,
-        ref: 'bacsi'
+    dongiakham: {
+        type: Number,
+        default: 34500
     },
     thoigian: {
         type: Date,
         default: Date.now
 
     }
-})
-module.exports = PhongKham = mongoose.model('phongkham', PhongKhanSchema)
+});
+module.exports = PhongKhamBenh = mongoose.model('phongkhambenh', PhongKhamBenhSchema)

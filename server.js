@@ -14,10 +14,16 @@ app.get('/', (req, res) => res.send('Server của bé Moon xinh đẹp'));
 
 //app.post('/', (req, res) => res.send('Server của bé Moon xinh đẹp'));
 
-// user route
+// Benh nhan route
 app.use('/api/benhnhan', require('./routes/api/benhnhan'));
 
-//
+// loai phong kham route
+app.use('/api/loaiphongkham', require('./routes/api/loaiphongkham'));
+
+
+//phong kham route
+app.use('/api/phongkham', require('./routes/api/phongkhambenh'));
+
 
 const PORT = process.env.PORT || 5000;
 

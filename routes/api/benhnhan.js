@@ -12,12 +12,16 @@ router.get('/', (req, res) => res.send('benhnhan route'));
 // @desc TEST route
 // @access Public
 
-router.post('/' , async (req, res) => {
+router.post('/' , 
+[check('hoten', 'hoten is required').not().isEmpty(),
+check('sodienthoai', 'sodienthoai is required').not().isEmpty(),
+check('gioitinh', 'gioitinh is required').not().isEmpty()],
+async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const {hoten, sodienthoai, ngaysinh, gioitinh} = req.body;
+    const {hoten, sodienthoai, ngaysinh, gioitinh, bhyt} = req.body;
     try {
         let benhnhan = await BenhNhan.findOne({sodienthoai});
         if(benhnhan){
@@ -28,7 +32,8 @@ router.post('/' , async (req, res) => {
             hoten, 
             sodienthoai,
             ngaysinh,
-            gioitinh
+            gioitinh,
+            bhyt: bhyt
         });
 
         await benhnhan.save();

@@ -6,16 +6,16 @@ const LoaiPhongKhamSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    dongiakham: {
-        type: Number,
-        required: true
-    },
-    soluong: {
-        type: Number,        
-    },
-    dichvu: {
-        type: [String]
-    },
+    dichvu:[{
+        tendichvu: {
+            type: String,
+            default: 'Công khám'
+        },
+        dongiadichvu: {
+            type: Number,
+            default: 55000
+        }
+    }],
     ghichu: {
         type: String
     },
