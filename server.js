@@ -1,6 +1,8 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
 
 const app = express();
 
@@ -8,6 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
+app.use(cors());
 connectDB();
 
 app.get('/', (req, res) => res.send('Server của bé Moon xinh đẹp'));
