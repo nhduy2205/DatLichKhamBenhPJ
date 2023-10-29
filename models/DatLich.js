@@ -15,6 +15,24 @@ const DatLichSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'benhnhan'
     },
+    hoten: {
+        type: String,
+        required: true
+    },
+    ngaysinh: {
+        type: Date,
+        required: true
+    },
+    gioitinh: {
+        type: Boolean,
+        default: true
+    },
+    nghenghiep: {
+        type: String
+    },
+    diachi: {
+        type: String,
+    },
     datkhamtungay: {
         type: Date,
         required: true 

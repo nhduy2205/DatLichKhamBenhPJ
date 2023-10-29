@@ -27,6 +27,9 @@ app.use('/api/loaiphongkham', require('./routes/api/loaiphongkham'));
 //phong kham route
 app.use('/api/phongkham', require('./routes/api/phongkhambenh'));
 
+//thong tin benh nhan
+app.use('/api/thongtinbenhnhan', require('./routes/api/thongtinbenhnhan'));
+
 
 const PORT = process.env.PORT || 5000;
 
