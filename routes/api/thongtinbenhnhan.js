@@ -2,6 +2,7 @@ const express = require('express');
 const { model } = require('mongoose');
 const router = express.Router();
 const ThongTinBenhNhan = require('./../../models/ThongTinBenhNhan');
+const BenhNhan = require('./../../models/BenhNhan');
 const {check, validationResult} = require('express-validator');
 // @route GET api/thongtinbenhnhan
 // @desc TEST route
@@ -14,7 +15,7 @@ router.get('/', (req, res) => res.send('thongtinbenhnhan route'));
 
 router.post('/themthongtinbenhnhan/:id' , 
 [check('hoten', 'hoten is required').not().isEmpty(),
-check('ngaysinh', 'sodienthoai is required').not().isEmpty(),
+check('ngaysinh', 'ngaysinh is required').not().isEmpty(),
 check('diachi', 'diachi is required').not().isEmpty()],
 async (req, res) => {
     const errors = validationResult(req);
@@ -22,16 +23,18 @@ async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
     const {benhnhan, hoten, ngaysinh, gioitinh, nghenghiep, diachi} = req.body;
+    const sodienthoai = "";
     try {
         let thongtinbenhnhan = await ThongTinBenhNhan.findById(req.params.id);
+        let benhnhan = await BenhNhan.findById(req.params.id);
         if(benhnhan){
-            res.status(400).json({errors: [{msg: 'Benh nhan da nhap thong tin'}]})
+            sodienthoai = benhnhan.sodienthoai;
         }
-
+        // thêm mới thông tin bệnh nhân
         thongtinbenhnhan = new ThongTinBenhNhan({
             benhnhan: req.params.id,
             hoten, 
-            sodienthoai,
+            sodienthoai: sodienthoai,
             ngaysinh,
             gioitinh,
             nghenghiep,
