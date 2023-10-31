@@ -6,7 +6,17 @@ const {check, validationResult} = require('express-validator');
 // @route GET api/users
 // @desc TEST route
 // @access Public
-router.get('/', (req, res) => res.send('benhnhan route'));
+router.get('/all', async (req, res) => 
+{
+    try{
+        const benhnhan = await BenhNhan.find();
+        res.status(200).json(benhnhan);
+    }catch(err){
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+
+});
 
 // @route post api/users
 // @desc TEST route

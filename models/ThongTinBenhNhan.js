@@ -11,7 +11,7 @@ const ThongTinBenhNhanSchema = new mongoose.Schema({
     },
     ngaysinh: {
         type: Date,
-        required: true
+        default: Date.now
     },
     gioitinh: {
         type: Boolean,
@@ -23,6 +23,9 @@ const ThongTinBenhNhanSchema = new mongoose.Schema({
     diachi: {
         type: String,
         required: true
+    },
+    soBHYT: {
+        type: String,
     }
 });
 

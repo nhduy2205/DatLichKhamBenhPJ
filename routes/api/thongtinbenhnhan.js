@@ -15,26 +15,27 @@ router.get('/', (req, res) => res.send('thongtinbenhnhan route'));
 
 router.post('/themthongtinbenhnhan/:id' , 
 [check('hoten', 'hoten is required').not().isEmpty(),
-check('ngaysinh', 'ngaysinh is required').not().isEmpty(),
 check('diachi', 'diachi is required').not().isEmpty()],
 async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const {benhnhan, hoten, ngaysinh, gioitinh, nghenghiep, diachi} = req.body;
-    const sodienthoai = "";
+    const {hoten, ngaysinh, gioitinh, nghenghiep, diachi} = req.body;
+    // const sodienthoai = "";
     try {
         let thongtinbenhnhan = await ThongTinBenhNhan.findById(req.params.id);
+        // if(thongtinbenhnhan){
+        //     res.json("bệnh nhân đã có thông tin");
+        // }
         let benhnhan = await BenhNhan.findById(req.params.id);
-        if(benhnhan){
-            sodienthoai = benhnhan.sodienthoai;
-        }
+        // if(benhnhan){
+        //     sodienthoai = benhnhan.sodienthoai;
+        // }
         // thêm mới thông tin bệnh nhân
         thongtinbenhnhan = new ThongTinBenhNhan({
-            benhnhan: req.params.id,
-            hoten, 
-            sodienthoai: sodienthoai,
+            benhnhan: benhnhan._id,
+            hoten,
             ngaysinh,
             gioitinh,
             nghenghiep,
@@ -43,8 +44,19 @@ async (req, res) => {
         await thongtinbenhnhan.save();
         res.status(200).send('Them thong tin benh nhan thanh cong');
     }catch(err){
-        res.status(500).json({errors: [{msg: err.msg}]});
+        res.status(500).json({errors: [{msg: err}]});
     }
+});
+
+router.get('/all', async (req, res) => {
+    try{
+        const thongTinBenhNhan = await ThongTinBenhNhan.find();
+        res.status(200).json(thongTinBenhNhan);
+    }catch(err){
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+
 });
 
 module.exports = router;
