@@ -56,7 +56,36 @@ router.get('/all', async (req, res) => {
         console.error(error.message);
         res.status(500).send('Server Error');
     }
-
 });
+
+// api lấy thông tin bệnh nhân theo số điện thoại
+router.post('/laytheosodienthoai' , 
+[check('sodienthoai', 'sodienthoai is required').not().isEmpty()],
+async (req, res) => {
+    // console.log(req.body);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array()});
+    }
+    const {sodienthoai} = req.body;
+    try {
+        let benhnhan = await BenhNhan.findOne({sodienthoai: sodienthoai});
+        if(benhnhan){
+            console.log(benhnhan.id);
+            let thongTinBenhNhan = await ThongTinBenhNhan.find({benhnhan: benhnhan.id}); 
+            if(thongTinBenhNhan){
+                return res.status(200).json({ thongTinBenhNhan });
+            }           
+           else {
+            return res.status(400).send("không tìm thấy!");
+           }
+        } 
+        return res.status(400).send("không tìm thấy!");
+
+    }catch(err){
+        res.status(500).json({errors: [{msg: err.msg}]});
+    }
+});
+
 
 module.exports = router;
