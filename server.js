@@ -15,8 +15,6 @@ connectDB();
 
 app.get('/', (req, res) => res.send('Server của bé Moon xinh đẹp'));
 
-//app.post('/', (req, res) => res.send('Server của bé Moon xinh đẹp'));
-
 // Benh nhan route
 app.use('/api/benhnhan', require('./routes/api/benhnhan'));
 
@@ -29,6 +27,9 @@ app.use('/api/phongkham', require('./routes/api/phongkhambenh'));
 
 //thong tin benh nhan
 app.use('/api/thongtinbenhnhan', require('./routes/api/thongtinbenhnhan'));
+
+//dat lich kham benh
+app.use('/api/datlichkham', require('./routes/api/datlich'));
 
 
 const PORT = process.env.PORT || 5000;

@@ -21,7 +21,7 @@ async (req, res) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const {hoten, ngaysinh, gioitinh, nghenghiep, diachi} = req.body;
+    const {hoten, ngaysinh, gioitinh, nghenghiep, diachi, soBHYT, bhytNgayHieuLuc, bhytNgayHetHan} = req.body;
     // const sodienthoai = "";
     try {
         let thongtinbenhnhan = await ThongTinBenhNhan.findById(req.params.id);
@@ -39,7 +39,10 @@ async (req, res) => {
             ngaysinh,
             gioitinh,
             nghenghiep,
-            diachi
+            diachi, 
+            soBHYT, 
+            bhytNgayHieuLuc,
+            bhytNgayHetHan
         });
         await thongtinbenhnhan.save();
         res.status(200).send('Them thong tin benh nhan thanh cong');

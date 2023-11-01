@@ -26,6 +26,12 @@ const ThongTinBenhNhanSchema = new mongoose.Schema({
     },
     soBHYT: {
         type: String,
+    },
+    bhytNgayHieuLuc: {
+        type: Date
+    },
+    bhytNgayHetHan: {
+        type: Date
     }
 });
 
