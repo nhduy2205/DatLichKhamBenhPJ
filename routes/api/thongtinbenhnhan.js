@@ -9,6 +9,21 @@ const {check, validationResult} = require('express-validator');
 // @access Public
 router.get('/', (req, res) => res.send('thongtinbenhnhan route'));
 
+// api lấy thông tin bệnh nhân theo id 
+router.get('/:id', async (req, res) => {
+    try{
+        const thongTinBenhNhan = await ThongTinBenhNhan.findById(req.params.id);
+        if(thongTinBenhNhan){
+            res.status(200).json(thongTinBenhNhan);
+        }else{
+            res.status(400).send("Không tìm thấy thông tin bệnh nhân theo ID");
+        }
+        
+    }catch(err){
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+});
 // @route post api/thongtinbenhnhan
 // @desc TEST route
 // @access Public
