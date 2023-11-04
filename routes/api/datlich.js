@@ -6,6 +6,7 @@ const BenhNhan = require('./../../models/BenhNhan');
 const DatLich = require('./../../models/DatLich');
 const {check, validationResult} = require('express-validator');
 const PhongKhamBenh = require('../../models/PhongKhamBenh');
+const ChuyenKhoa = require('../../models/ChuyenKhoa');
 
 // @route GET api/thongtinbenhnhan
 // @desc TEST route
@@ -18,13 +19,14 @@ router.post('/:id' ,
 check('ngaykham', 'ngaykham is required').not().isEmpty(),
 check('khunggiokham', 'khunggiokham is required').not().isEmpty(),
 check('hinhthucthanhtoan', 'hinhthucthanhtoan is required').not().isEmpty(),
-check('phongkham', 'phongkham is required').not().isEmpty()],
+check('phongkham', 'phongkham is required').not().isEmpty(),
+check('chuyenkhoa_id', 'chuyenkhoa_id is required').not().isEmpty()],
 async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const {phongkham, trieuchung, tongtien, ngaykham, khunggiokham, hinhthucthanhtoan, trangthaixacthuc} = req.body;
+    const {phongkham, chuyenkhoa_id, trieuchung, tongtien, ngaykham, khunggiokham, hinhthucthanhtoan, trangthaixacthuc} = req.body;
     // const sodienthoai = "";
     try {
         //let datlich = await DatLich.find
@@ -33,11 +35,13 @@ async (req, res) => {
         //     res.json("bệnh nhân đã có thông tin");
         // }
         let phongkhamP = await PhongKhamBenh.findById(phongkham);
+        let chuyenkhoa = await ChuyenKhoa.findById(chuyenkhoa_id);
         if(thongtinbenhnhan){
             if(phongkhamP){
                 let datlich = new DatLich({
                     thongtinbenhnhan: thongtinbenhnhan._id,
                     phongkham: phongkhamP._id,
+                    chuyenkhoa: chuyenkhoa._id,
                     trieuchung,
                     tongtien,
                     ngaykham,

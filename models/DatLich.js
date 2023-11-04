@@ -9,6 +9,10 @@ const DatLichSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'phongkhambenh'
     },
+    chuyenkhoa: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'chuyenkhoa'
+    },
     trieuchung: {
         type: String
     },
