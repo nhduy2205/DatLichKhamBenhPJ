@@ -31,6 +31,9 @@ app.use('/api/thongtinbenhnhan', require('./routes/api/thongtinbenhnhan'));
 //dat lich kham benh
 app.use('/api/datlichkham', require('./routes/api/datlich'));
 
+// chuyen khoa
+
+app.use('/api/chuyenkhoa', require('./routes/api/chuyenkhoa'));
 
 const PORT = process.env.PORT || 5000;
 
