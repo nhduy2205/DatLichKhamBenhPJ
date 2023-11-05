@@ -3,6 +3,7 @@ const { model } = require('mongoose');
 const router = express.Router();
 const PhongKhamBenh = require('./../../models/PhongKhamBenh');
 const {check, validationResult} = require('express-validator');
+const KhungGioKham = require('../../models/KhungGioKham');
 
 // @route GET api/loaiphongkham
 // @desc TEST route
@@ -27,7 +28,7 @@ router.post('/' ,[check('tenphong', 'tenphong is required').not().isEmpty()],
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const {tenphong, loaiphong, trangthai, dongiakham, thoigian} = req.body;
+    const {tenphong, chuyenkhoa, trangthai, dongiakham, thoigian} = req.body;
     try {
         let phongkhambenh = await PhongKhamBenh.findOne({tenphong});
         if(phongkhambenh){
@@ -36,7 +37,7 @@ router.post('/' ,[check('tenphong', 'tenphong is required').not().isEmpty()],
 
         phongkhambenh = new PhongKhamBenh({
             tenphong, 
-            loaiphong: loaiphong,
+            chuyenkhoa: chuyenkhoa,
             trangthai,
             dongiakham,
             thoigian
@@ -48,5 +49,44 @@ router.post('/' ,[check('tenphong', 'tenphong is required').not().isEmpty()],
         res.status(500).json({errors: [{msg: err.msg}]});
     }
 });
+
+// them khung gio kham
+
+router.post('/themkhunggiokham' ,[check('khunggiokham', 'khunggiokham is required').not().isEmpty()],
+    async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const {khunggiokham, giatri} = req.body;
+    try {
+        let khunggiokhamP = await KhungGioKham.findOne({khunggiokham});
+        if(khunggiokhamP){
+            res.status(400).json({errors: [{msg: 'Phong kham da ton tai'}]})
+        }
+
+        khunggiokhamP = new KhungGioKham({
+            khunggiokham,
+            giatri
+        });
+
+        await khunggiokhamP.save();
+        res.send('them thanh cong');
+    }catch(err){
+        res.status(500).json({errors: [{msg: err.msg}]});
+    }
+});
+
+// get khun gio kham
+router.get('/laykhunggiokham',async (req, res) => {
+    try{
+        const khunggiokham = await KhungGioKham.find();
+        res.status(200).json(khunggiokham);
+    }catch(err){
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 
 module.exports = router;

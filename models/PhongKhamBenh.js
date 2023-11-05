@@ -5,9 +5,9 @@ const PhongKhamBenhSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    loaiphong: {
+    chuyenkhoa: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'loaiphongkham'
+        ref: 'chuyenkhoa'
     },
     trangthai: {
         type: String,
@@ -15,7 +15,7 @@ const PhongKhamBenhSchema = new mongoose.Schema({
     },
     dongiakham: {
         type: Number,
-        default: 34500
+        default: 110000
     },
     thoigian: {
         type: Date,

@@ -1,0 +1,13 @@
+const mongoose = require('mongoose');
+
+const KhungGioKhamSchema = new mongoose.Schema({
+    khunggiokham: {
+        type: String,
+        required: true
+    },
+    giatri: {
+        type: Number,
+        required: true
+    }
+});
+module.exports = KhungGioKham = mongoose.model('khunggiokham', KhungGioKhamSchema)
