@@ -112,7 +112,8 @@ async (req, res) => {
 
 // lấy thông tinh đặt lịch theo ngày
 router.post('/laytheongay' , 
-[check('ngaykham', 'ngaykham is required').not().isEmpty()],
+[check('ngaykham', 'ngaykham is required').not().isEmpty(), 
+check('chuyenkhoa', 'chuyenkhoa is required').not().isEmpty()],
 async (req, res) => {
     // console.log(req.body);
     const errors = validationResult(req);
@@ -120,10 +121,10 @@ async (req, res) => {
       return res.status(400).json({ errors: errors.array()});
     }
     console.log(req.body);
-    const {ngaykham} = req.body;
+    const {ngaykham, chuyenkhoa} = req.body;
     
     try {
-        let datlich = await DatLich.find({ngaykham: ngaykham});
+        let datlich = await DatLich.find({ngaykham: ngaykham, chuyenkhoa:chuyenkhoa});
         if(datlich){
             return res.status(200).json({ datlich });
         }else{
