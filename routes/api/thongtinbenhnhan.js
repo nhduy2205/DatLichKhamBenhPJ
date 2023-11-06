@@ -3,6 +3,7 @@ const { model } = require('mongoose');
 const router = express.Router();
 const ThongTinBenhNhan = require('./../../models/ThongTinBenhNhan');
 const BenhNhan = require('./../../models/BenhNhan');
+const DatLich = require('./../../models/DatLich');
 const {check, validationResult} = require('express-validator');
 // @route GET api/thongtinbenhnhan
 // @desc TEST route
@@ -109,5 +110,28 @@ async (req, res) => {
     }
 });
 
+// lấy thông tinh đặt lịch theo ngày
+router.post('/laytheongay' , 
+[check('ngaykham', 'ngaykham is required').not().isEmpty()],
+async (req, res) => {
+    // console.log(req.body);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array()});
+    }
+    console.log(req.body);
+    const {ngaykham} = req.body;
+    
+    try {
+        let datlich = await DatLich.find({ngaykham: ngaykham});
+        if(datlich){
+            return res.status(200).json({ datlich });
+        }else{
+            return res.status(400).send("không tìm thấy!");
+        } 
+    }catch(err){
+        res.status(500).json({errors: [{msg: err.msg}]});
+    }
+});
 
 module.exports = router;

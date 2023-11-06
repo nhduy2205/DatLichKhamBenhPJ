@@ -72,7 +72,7 @@ async (req, res) => {
 });
 
 // lấy thông tinh đặt lịch theo ngày
-router.get('/laytheongay' , 
+router.post('/laytheongay' , 
 [check('ngaykham', 'ngaykham is required').not().isEmpty()],
 async (req, res) => {
     // console.log(req.body);
