@@ -12,6 +12,20 @@ const KhungGioKham = require('../../models/KhungGioKham');
 // @route GET api/thongtinbenhnhan
 // @desc TEST route
 // @access Public
+router.get('/theohoso/:id', async (req, res) => {
+    try{
+        
+        const datlich = await DatLich.find({thongtinbenhnhan: req.params.id});
+        if(datlich){
+             res.status(200).json(datlich);
+        }else{
+            res.status(400).send("Không tìm thấy thông tin đặt lịch của bệnh nhân");
+        }
+    }catch(err){
+        res.status(500).send('Server Error');
+    }
+});
+
 router.get('/all', async (req, res) => {
     try{
         
