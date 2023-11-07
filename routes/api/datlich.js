@@ -65,6 +65,7 @@ async (req, res) => {
         //let phongkhamP = await PhongKhamBenh.findById(phongkham);
         let chuyenkhoaP = await ChuyenKhoa.findById(chuyenkhoa);
         let phongkham = await PhongKhamBenh.findOne({chuyenkhoa:chuyenkhoa});
+        let khunggiokhamP = await KhungGioKham.findOne({giatri: khunggiokham});
         console.log(phongkham);
         if(thongtinbenhnhan){
             let datlich = new DatLich({
@@ -76,7 +77,14 @@ async (req, res) => {
                 ngaykham: proposedDate,
                 khunggiokham,
                 hinhthucthanhtoan,
-                trangthaixacthuc 
+                trangthaixacthuc,
+                tenchuyenkhoa: chuyenkhoaP.tenchuyenkhoa,
+                tenkhunggiokham: khunggiokhamP.khunggiokham,
+                tenphongkham: phongkham.tenphong,
+                hoten: thongtinbenhnhan.hoten,
+                ngaysinh: thongtinbenhnhan.ngaysinh,
+                diachi: thongtinbenhnhan.diachi,
+                theBHYT: thongtinbenhnhan.soBHYT
             });
             await datlich.save();
             res.status(200).json(datlich._id);
