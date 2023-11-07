@@ -8,6 +8,10 @@ const KhungGioKhamSchema = new mongoose.Schema({
     giatri: {
         type: Number,
         required: true
-    }
+    },
+    giobatdau: {
+        type: Number,
+        required: true
+    },
 });
 module.exports = KhungGioKham = mongoose.model('khunggiokham', KhungGioKhamSchema)

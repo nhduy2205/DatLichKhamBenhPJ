@@ -38,6 +38,9 @@ async (req, res) => {
       return res.status(400).json({ errors: errors.array() });
     }
     const {chuyenkhoa, trieuchung, ngaykham, khunggiokham, hinhthucthanhtoan, trangthaixacthuc} = req.body;
+    var localTime = new Date(ngaykham).toISOString().slice(0, 10); // store localTime
+    var proposedDate = localTime + "T00:00:00.000Z";
+    console.log(proposedDate);
     // const sodienthoai = "";
     try {
         //let datlich = await DatLich.find
@@ -56,7 +59,7 @@ async (req, res) => {
                 chuyenkhoa: chuyenkhoaP._id,
                 trieuchung,
                 tongtien: phongkham.dongiakham,
-                ngaykham,
+                ngaykham: proposedDate,
                 khunggiokham,
                 hinhthucthanhtoan,
                 trangthaixacthuc 

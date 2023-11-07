@@ -58,7 +58,7 @@ router.post('/themkhunggiokham' ,[check('khunggiokham', 'khunggiokham is require
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const {khunggiokham, giatri} = req.body;
+    const {khunggiokham, giatri, giobatdau} = req.body;
     try {
         let khunggiokhamP = await KhungGioKham.findOne({khunggiokham});
         if(khunggiokhamP){
@@ -67,7 +67,8 @@ router.post('/themkhunggiokham' ,[check('khunggiokham', 'khunggiokham is require
 
         khunggiokhamP = new KhungGioKham({
             khunggiokham,
-            giatri
+            giatri,
+            giobatdau
         });
 
         await khunggiokhamP.save();
