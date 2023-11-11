@@ -29,14 +29,29 @@ router.get('/theohoso/:id', async (req, res) => {
 router.get('/all', async (req, res) => {
     try{
         
-        const datlich = await DatLich.find();
+        const datlich = await DatLich.find().sort({trangthaikhambenh: 1}).sort({ngaykham:-1});
         if(datlich){
+            
              res.status(200).json(datlich);
         }else{
             res.status(400).send("Không tìm thấy dữ liệu");
         }
     }catch(err){
         res.status(500).send('Server Error');
+    }
+});
+// @route    PUT api/bill/checkout/id
+// Cập nhật trạng thái bill
+router.put('/capnhattrangthaikhambenh/:id', async (req, res) => {
+    try {
+      const datlich = await DatLich.findById(req.params.id);
+      datlich.trangthaikhambenh = 1;
+      await datlich.save();
+      const allDatLich = await DatLich.find().sort({trangthaikhambenh: 1}).sort({ngaykham:-1});
+      return res.status(200).json(allDatLich);
+    } catch (e) {
+      console.error(error);
+      res.status(500).send('allDatLichr');
     }
 });
 

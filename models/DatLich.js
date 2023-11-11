@@ -58,6 +58,11 @@ const DatLichSchema = new mongoose.Schema({
     trangthaixacthuc: {
         type: String,
         default: 'no'
+    },
+    // 0: chưa khám, 1 đã khám
+    trangthaikhambenh: {
+        type: Number,
+        default: 0
     }
 });
 
